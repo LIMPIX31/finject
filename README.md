@@ -23,6 +23,30 @@ const buf = Buffer.alloc(1025) // Trying to allocate buffer larger than 1024 wit
 console.log(buf.length) // 1024
 ```
 
+## 📦 With prototype
+```ts
+class Example {
+  foo: string
+  constructor() {
+    this.foo = 'bar'
+  }
+
+  baz(a: string, b: number) {
+    return a + b
+  }
+}
+
+inject(Example.prototype, 'baz', ({ object, target }, a, b) => {
+  console.log('Method baz invoked. Foo property is:', object.foo)
+  return target(a, b + 2)
+})
+
+const example = new Example()
+console.log(example.baz('a', 1))
+// Method baz invoked. Foo property is: bar
+// a3
+```
+
 ## ℹ️ Specific usage
 If you need to suppress the return value, use `noreturn()`. 
 
@@ -43,5 +67,7 @@ target = flinject(target, ({ noreturn }, a, b) => {
   if(b !== 0) return
   console.log(`Divide by zero!`)
   noreturn()
+  // or
+  return noreturn()
 })
 ```

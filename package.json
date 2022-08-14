@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@types/stack-trace": "^0.0.30",
-    "stack-trace": "^1.0.0-pre1"
+    "stack-trace": "https://github.com/LIMPIX31/node-stack-trace"
   },
   "keywords": [
     "inject",
